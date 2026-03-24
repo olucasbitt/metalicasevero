@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+/* Scroll suave */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base do site */
+body {
+  @apply bg-[#0a1628] text-white antialiased;
+  font-family: var(--font-sans);
+}
+
+/* Imagens mais controladas */
+img {
+  @apply block max-w-full;
+}
