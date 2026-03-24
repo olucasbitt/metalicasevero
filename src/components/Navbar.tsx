@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { whatsappUrl } from '../data/siteContent'
 import { Menu, X } from 'lucide-react'
 
 export function Navbar() {
