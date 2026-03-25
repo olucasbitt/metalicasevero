@@ -9,6 +9,7 @@ import { Portfolio } from './components/Portfolio';
 import { Process } from './components/Process';
 import { Services } from './components/Services';
 import { TrustBar } from './components/TrustBar';
+import { Seguros } from './components/Seguros';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Portfolio />
         <BeforeAfter />
         <About />
+		<Seguros />
         <Process />
         <Cta />
         <Location />
