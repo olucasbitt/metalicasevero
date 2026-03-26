@@ -1,5 +1,6 @@
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
+import { SectionHeading } from '../components/SectionHeading'
 import { whatsappUrl } from '../data/siteContent'
 
 type Insurance = {
@@ -8,43 +9,43 @@ type Insurance = {
 }
 
 const credenciadas: Insurance[] = [
-  { name: 'Bradesco Seguros', logo: '/images/seguros/bradesco.png' },
-  { name: 'Tokio Marine', logo: '/images/seguros/tokio.png' },
-  { name: 'HDI Seguros', logo: '/images/seguros/hdi.png' },
-  { name: 'Mapfre Seguros', logo: '/images/seguros/mapfre.png' },
-  { name: 'Liberty Seguros / Yelum Seguros', logo: '/images/seguros/liberty.png' },
-  { name: 'Santander Seguros', logo: '/images/seguros/santander.png' },
   { name: 'Alfa Seguros', logo: '/images/seguros/alfa.png' },
-  { name: 'Essor' },
-  { name: 'Gente Seguradora' },
-  { name: 'Justos Seguros' },
+  { name: 'Bradesco Seguros', logo: '/images/seguros/bradesco.png' },
+  { name: 'Essor', logo: '/images/seguros/essor.png' },
+  { name: 'Gente Seguradora', logo: '/images/seguros/gente.png' },
+  { name: 'HDI Seguros', logo: '/images/seguros/hdi.png' },
+  { name: 'Justos Seguros', logo: '/images/seguros/justos.png' },
+  { name: 'Liberty Seguros / Yelum Seguros', logo: '/images/seguros/liberty.png' },
+  { name: 'Mapfre Seguros', logo: '/images/seguros/mapfre.png' },
+  { name: 'Santander Seguros', logo: '/images/seguros/santander.png' },
+  { name: 'Tokio Marine', logo: '/images/seguros/tokio.png' },
 ]
 
 const naoCredenciadas: Insurance[] = [
+  { name: 'AIG Seguros', logo: '/images/seguros/aig.png' },
   { name: 'Allianz', logo: '/images/seguros/allianz.png' },
-  { name: 'Suhai Seguradora', logo: '/images/seguros/suhai.png' },
+  { name: 'AXA Seguros', logo: '/images/seguros/axa.png' },
   { name: 'Azul Seguros (Grupo Porto)', logo: '/images/seguros/azul.png' },
-  { name: 'Youse', logo: '/images/seguros/youse.png' },
-  { name: 'Ituran com Seguro', logo: '/images/seguros/ituran.png' },
+  { name: 'Capemisa', logo: '/images/seguros/capemisa.png' },
+  { name: 'Cardif Seguros', logo: '/images/seguros/cardif.png' },
+  { name: 'Chubb Seguros', logo: '/images/seguros/chubb.png' },
+  { name: 'Embracon', logo: '/images/seguros/embracon.png' },
+  { name: 'Ezze Seguros', logo: '/images/seguros/ezze.png' },
+  { name: 'Fairfax', logo: '/images/seguros/fairfax.png' },
   { name: 'Itaú Seguros', logo: '/images/seguros/itau.png' },
-  { name: 'AXA Seguros' },
-  { name: 'Chubb Seguros' },
-  { name: 'AIG Seguros'  },
-  { name: 'Fairfax' },
-  { name: 'Swiss Re' },
-  { name: 'Mitsui Sumitomo Seguros' },
-  { name: 'Ezze Seguros' },
-  { name: 'Too Seguros' },
-  { name: 'Cardif Seguros' },
-  { name: 'Capemisa' },
-  { name: 'Embracon' },
+  { name: 'Ituran com Seguro', logo: '/images/seguros/ituran.png' },
+  { name: 'Mitsui Sumitomo Seguros', logo: '/images/seguros/mitsui.png' },
+  { name: 'Suhai Seguradora', logo: '/images/seguros/suhai.png' },
+  { name: 'Swiss Re', logo: '/images/seguros/swissre.png' },
+  { name: 'Too Seguros', logo: '/images/seguros/too.png' },
+  { name: 'Youse', logo: '/images/seguros/youse.png' },
 ]
 
 const associacoesCredenciadas: Insurance[] = [
-  { name: 'APVS' },
-  { name: 'STAR' },
-  { name: 'AGV' },
-  { name: 'UNNICA' },
+  { name: 'AGV', logo: '/images/seguros/agv.png' },
+  { name: 'APVS', logo: '/images/seguros/apvs.png' },
+  { name: 'STAR', logo: '/images/seguros/star.png' },
+  { name: 'UNNICA', logo: '/images/seguros/unnica.png' },
 ]
 
 function buildWhatsappLink(company?: string) {
@@ -56,13 +57,7 @@ function buildWhatsappLink(company?: string) {
   return `${whatsappUrl}${separator}text=${encodeURIComponent(message)}`
 }
 
-function InsuranceCard({
-  item,
-  badge,
-}: {
-  item: Insurance
-  badge: string
-}) {
+function InsuranceCard({ item }: { item: Insurance }) {
   const hasLogo = Boolean(item.logo)
 
   return (
@@ -70,77 +65,54 @@ function InsuranceCard({
       href={buildWhatsappLink(item.name)}
       target="_blank"
       rel="noreferrer"
-      className="group rounded-[20px] border border-white/10 bg-[#0f1d33] p-4 shadow-[0_10px_25px_rgba(0,0,0,0.2)] transition duration-300 hover:-translate-y-0.5 hover:border-[#e8651a]/40"
+      aria-label={`Falar sobre ${item.name}`}
+      className="group relative flex flex-col justify-center border border-[#1a3a6a] bg-[#0f2a52] p-6 transition hover:bg-[#133266]"
     >
-      <div className="flex items-center justify-between gap-2">
-        <div className="min-w-0 flex-1">
-          {hasLogo ? (
-            <div className="flex h-10 items-center">
-              <img
-                src={item.logo}
-                alt={item.name}
-                className="max-h-8 w-auto object-contain"
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <h3 className="font-['Barlow_Condensed'] text-xl uppercase tracking-wide text-white">
-              {item.name}
-            </h3>
-          )}
-        </div>
-
-        <span className="shrink-0 rounded-full border border-[#e8651a]/20 bg-[#e8651a]/10 px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#ff9b5c]">
-          {badge}
-        </span>
-      </div>
+      <div className="absolute bottom-0 left-0 h-[3px] w-full origin-left scale-x-0 bg-[#e8651a] transition duration-300 group-hover:scale-x-100" />
 
       {hasLogo && (
-        <h3 className="mt-2 font-['Barlow_Condensed'] text-lg uppercase tracking-wide text-white">
-          {item.name}
-        </h3>
+        <div className="flex h-14 items-center justify-center">
+          <img
+            src={item.logo}
+            alt={item.name}
+            className="max-h-10 w-auto object-contain opacity-90 group-hover:opacity-100"
+            loading="lazy"
+          />
+        </div>
       )}
 
-      <div className="mt-3 text-xs font-semibold text-[#ff9b5c] transition group-hover:translate-x-1">
-        Solicitar atendimento →
-      </div>
+      <h3 className="mt-4 text-center font-['Barlow_Condensed'] text-xl font-bold uppercase text-white">
+        {item.name}
+      </h3>
     </a>
   )
 }
 
-function SectionBlock({
+function InsuranceSection({
   label,
   title,
   description,
   items,
-  badge,
 }: {
   label: string
   title: string
   description: string
   items: Insurance[]
-  badge: string
 }) {
   return (
-    <section className="rounded-[30px] border border-white/10 bg-[#0b1525] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.25)] md:p-8">
-      <div className="max-w-3xl">
-        <span className="inline-flex rounded-full border border-[#e8651a]/25 bg-[#e8651a]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#ff9b5c]">
-          {label}
-        </span>
+    <section className="py-24">
+      <div className="mx-auto w-full max-w-[1180px] px-4 md:px-8">
+        <SectionHeading
+          label={label}
+          title={title}
+          description={description}
+        />
 
-        <h2 className="mt-4 font-['Barlow_Condensed'] text-3xl uppercase tracking-wider text-white md:text-4xl">
-          {title}
-        </h2>
-
-        <p className="mt-3 text-sm leading-6 text-[#b8cce0]">
-          {description}
-        </p>
-      </div>
-
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {items.map((item) => (
-          <InsuranceCard key={item.name} item={item} badge={badge} />
-        ))}
+        <div className="mt-12 grid grid-cols-2 gap-[2px] xl:grid-cols-3">
+          {items.map((item) => (
+            <InsuranceCard key={item.name} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -148,36 +120,30 @@ function SectionBlock({
 
 export function SeguradorasPage() {
   return (
-    <div className="min-h-screen bg-[#09111f] text-white">
+    <div className="min-h-screen bg-[#0d2244] text-white">
       <Navbar />
 
       <main>
-        {/* HERO MAIS SUAVE */}
-        <section className="relative overflow-hidden border-b border-white/10 bg-[#09111f] py-16 md:py-20">
-          <div className="absolute -left-16 top-10 h-40 w-40 rounded-full bg-[#e8651a]/10 blur-3xl" />
-          <div className="absolute right-0 top-0 h-56 w-56 rounded-full bg-white/[0.04] blur-3xl" />
+        {/* HERO */}
+        <section className="border-b border-[#1a3a6a] bg-[#0d2244] py-24">
+          <div className="mx-auto w-full max-w-[1180px] px-4 md:px-8">
+            <span className="block font-['Barlow_Condensed'] text-xs font-extrabold uppercase tracking-[0.18em] text-[#e8651a]">
+              Atendimento com seguradoras
+            </span>
 
-          <div className="relative mx-auto w-full max-w-[1180px] px-4 md:px-8">
-            
-
-            <h1 className="mt-4 max-w-3xl font-['Barlow_Condensed'] text-4xl uppercase tracking-wider text-white md:text-5xl">
+            <h1 className="mt-4 max-w-4xl font-['Barlow_Condensed'] text-4xl font-bold uppercase leading-tight text-white md:text-5xl">
               Seguradoras e associações atendidas pela Metálica Severo
             </h1>
 
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-[#9fb3c8] md:text-base">
-              Atendimento com seguradoras credenciadas, outras companhias e
-              associações, garantindo mais agilidade e suporte durante todo o
-              processo do reparo.
+            <p className="mt-4 max-w-2xl text-[1rem] leading-7 text-[#b8cce0]">
+              Atendimento com seguradoras de todo o Brasil, com suporte completo
+              do início ao fim do processo de reparo.
             </p>
-
-            <div className="mt-6 text-sm text-[#9fb3c8]">
-              Atendimento ágil • Suporte completo • Garantia no serviço
-            </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="/#seguros"
-                className="inline-flex h-11 items-center justify-center rounded-lg border border-white/10 px-4 text-sm text-white/90 transition hover:bg-white/5"
+                className="inline-flex h-11 items-center justify-center border border-[#1a3a6a] px-5 text-sm font-medium text-white transition hover:bg-[#133266]"
               >
                 Voltar
               </a>
@@ -186,7 +152,7 @@ export function SeguradorasPage() {
                 href={buildWhatsappLink()}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-11 items-center justify-center rounded-lg bg-[#25d366] px-4 text-sm font-medium text-white transition hover:bg-[#1ebe5d]"
+                className="inline-flex h-11 items-center justify-center bg-[#e8651a] px-5 text-sm font-semibold text-white transition hover:brightness-110"
               >
                 Falar no WhatsApp
               </a>
@@ -194,55 +160,55 @@ export function SeguradorasPage() {
           </div>
         </section>
 
-        {/* LISTAS */}
-        <section className="py-16 md:py-20">
-          <div className="mx-auto w-full max-w-[1180px] space-y-8 px-4 md:px-8">
-            <SectionBlock
-              label="Credenciadas"
-              title="Seguradoras credenciadas"
-              description="Empresas com atendimento credenciado junto à Metálica Severo."
-              items={credenciadas}
-              badge="Credenciada"
-            />
+        {/* SEÇÕES */}
+		<InsuranceSection
+		  label="Credenciadas"
+		  title="Seguradoras nas quais somos credenciados"
+		  description="Trabalhamos com seguradoras nas quais somos credenciados, garantindo mais agilidade no atendimento, processos simplificados e qualidade nos reparos."
+		  items={credenciadas}
+		/>
 
-            <SectionBlock
-              label="Já atendidas"
-              title="Seguradoras já atendidas"
-              description="Companhias com as quais já realizamos serviços."
-              items={naoCredenciadas}
-              badge="Atendida"
-            />
+		<InsuranceSection
+		  label="Outras seguradoras"
+		  title="Seguradoras com as quais também trabalhamos"
+		  description="Também atendemos seguradoras fora da rede credenciada, oferecendo suporte completo e orientação durante todo o processo."
+		  items={naoCredenciadas}
+		/>
 
-            <SectionBlock
-              label="Associações"
-              title="Associações credenciadas"
-              description="Atendimento para proteção veicular e associações."
-              items={associacoesCredenciadas}
-              badge="Associação"
-            />
-          </div>
-        </section>
+		<InsuranceSection
+		  label="Associações"
+		  title="Associações credenciadas"
+		  description="Atendimento especializado para proteção veicular e associações, com acompanhamento completo e qualidade nos serviços."
+		  items={associacoesCredenciadas}
+		/>
 
         {/* CTA FINAL */}
-        <section className="pb-20">
+        <section className="pb-24">
           <div className="mx-auto w-full max-w-[1180px] px-4 md:px-8">
-            <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,#0f1d33,#0b1525)] p-8 md:p-10">
-              <h2 className="font-['Barlow_Condensed'] text-3xl uppercase text-white md:text-4xl">
+            <div className="border border-[#1a3a6a] bg-[#0f2a52] p-8 md:p-10">
+              <span className="block font-['Barlow_Condensed'] text-xs font-extrabold uppercase tracking-[0.18em] text-[#e8651a]">
+                Suporte completo
+              </span>
+
+              <h2 className="mt-4 font-['Barlow_Condensed'] text-3xl font-bold uppercase text-white md:text-4xl">
                 Não encontrou sua seguradora?
               </h2>
 
-              <p className="mt-3 text-sm text-[#b8cce0]">
-                Fale com nossa equipe e vamos te orientar no atendimento.
+              <p className="mt-4 max-w-2xl text-[1rem] leading-7 text-[#b8cce0]">
+                Fale com nossa equipe e vamos orientar você da melhor forma para
+                realizar o reparo do seu veículo com segurança e agilidade.
               </p>
 
-              <a
-                href={buildWhatsappLink()}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex h-11 items-center justify-center rounded-lg bg-[#e8651a] px-5 text-sm font-semibold text-white transition hover:opacity-90"
-              >
-                Falar no WhatsApp
-              </a>
+              <div className="mt-8">
+                <a
+                  href={buildWhatsappLink()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex h-11 items-center justify-center bg-[#e8651a] px-5 text-sm font-semibold text-white transition hover:brightness-110"
+                >
+                  Falar no WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </section>
