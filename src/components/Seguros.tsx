@@ -4,13 +4,9 @@ import { SectionHeading } from './SectionHeading'
 
 const partners = [
   { name: 'Bradesco Seguros', logo: '/images/seguros/bradesco.png' },
-  { name: 'Porto', logo: '/images/seguros/porto.png' },
-  { name: 'HDI', logo: '/images/seguros/hdi.png' },
+  { name: 'HDI Seguros', logo: '/images/seguros/hdi.png' },
   { name: 'Tokio Marine', logo: '/images/seguros/tokio.png' },
-  { name: 'Mapfre', logo: '/images/seguros/mapfre.png' },
-  { name: 'Allianz', logo: '/images/seguros/allianz.png' },
-  { name: 'Suhai', logo: '/images/seguros/suhai.png' },
-  { name: 'Zurich', logo: '/images/seguros/zurich.png' },
+  { name: 'Mapfre Seguros', logo: '/images/seguros/mapfre.png' },
 ]
 
 const benefits = [
@@ -89,9 +85,9 @@ export function Seguros() {
 					</h3>
 
                   <p className="mt-3 text-[1rem] leading-7 text-[#b8cce0]">
-                    Trabalhamos com atendimento voltado a seguradoras e associações,
-                    oferecendo mais praticidade desde a entrada do veículo até a
-                    entrega final.
+                    Somos credenciados nas principais seguradoras do mercado e também
+					atendemos diversas outras companhias e associações, garantindo mais
+					flexibilidade e agilidade no seu atendimento.
                   </p>
                 </div>
               </div>
@@ -109,9 +105,22 @@ export function Seguros() {
                       loading="lazy"
                     />
                   </div>
+				  
                 ))}
               </div>
             </div>
+			<div className="mt-6 flex flex-col items-center gap-3 text-center">
+			  <p className="text-sm text-[#b8cce0]">
+				Trabalhamos com diversas outras seguradoras e associações além destas.
+			  </p>
+
+			  <a
+				href="/seguradoras"
+				className="inline-flex items-center gap-2 rounded-xl border border-[#e8651a]/40 px-5 py-2 text-sm font-semibold text-[#ff9b5c] transition hover:bg-[#e8651a]/10"
+			  >
+				Ver todas as seguradoras →
+			  </a>
+			</div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               {benefits.map((benefit) => (

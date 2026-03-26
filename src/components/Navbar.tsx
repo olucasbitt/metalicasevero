@@ -1,38 +1,52 @@
 import { useState } from 'react'
 import { whatsappUrl } from '../data/siteContent'
 import { Menu, X } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const location = useLocation()
+
+  const isHome = location.pathname === '/'
+
+  const getLink = (hash: string) => {
+    return isHome ? hash : `/${hash}`
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a1628]/80 backdrop-blur border-b border-white/10">
       <div className="mx-auto flex h-16 w-full max-w-[1180px] items-center px-4 md:px-8">
         
         {/* LOGO */}
-        <a href="#home" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img src="/images/logo.png" alt="Metálica Severo" className="h-10" />
-        </a>
+        </Link>
 
-        {/* ESPAÇO FLEX */}
         <div className="flex-1" />
 
-        {/* LINKS DESKTOP (ALINHADOS À DIREITA) */}
+        {/* LINKS DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-sm text-[#b8cce0]">
-          <a href="#servicos" className="hover:text-white transition">
+          <Link to={getLink('#servicos')} className="hover:text-white transition">
             Serviços
-          </a>
-          <a href="#sobre" className="hover:text-white transition">
-            Sobre
-          </a>
-          <a href="#galeria" className="hover:text-white transition">
-            Galeria
-          </a>
-          <a href="#contato" className="hover:text-white transition">
-            Contato
-          </a>
+          </Link>
 
-          {/* BOTÃO */}
+          <Link to={getLink('#sobre')} className="hover:text-white transition">
+            Sobre
+          </Link>
+
+          <Link to={getLink('#galeria')} className="hover:text-white transition">
+            Galeria
+          </Link>
+
+          <Link to={getLink('#contato')} className="hover:text-white transition">
+            Contato
+          </Link>
+
+          {/* NOVO LINK (IMPORTANTE) */}
+          <Link to="/seguradoras" className="hover:text-white transition">
+            Seguradoras
+          </Link>
+
           <a
             href={whatsappUrl}
             target="_blank"
@@ -60,18 +74,29 @@ export function Navbar() {
       >
         <div className="flex flex-col gap-4 px-6 pb-6 pt-4 bg-[#0a1628]/95 backdrop-blur border-t border-white/10">
           
-          <a onClick={() => setOpen(false)} href="#servicos" className="text-[#b8cce0] hover:text-white">
+          <Link onClick={() => setOpen(false)} to={getLink('#servicos')} className="text-[#b8cce0] hover:text-white">
             Serviços
-          </a>
-          <a onClick={() => setOpen(false)} href="#sobre" className="text-[#b8cce0] hover:text-white">
+          </Link>
+
+          <Link onClick={() => setOpen(false)} to={getLink('#sobre')} className="text-[#b8cce0] hover:text-white">
             Sobre
-          </a>
-          <a onClick={() => setOpen(false)} href="#galeria" className="text-[#b8cce0] hover:text-white">
+          </Link>
+
+          <Link onClick={() => setOpen(false)} to={getLink('#galeria')} className="text-[#b8cce0] hover:text-white">
             Galeria
-          </a>
-          <a onClick={() => setOpen(false)} href="#contato" className="text-[#b8cce0] hover:text-white">
+          </Link>
+
+          <Link onClick={() => setOpen(false)} to={getLink('#contato')} className="text-[#b8cce0] hover:text-white">
             Contato
-          </a>
+          </Link>
+
+          <Link
+            onClick={() => setOpen(false)}
+            to="/seguradoras"
+            className="text-[#b8cce0] hover:text-white"
+          >
+            Seguradoras
+          </Link>
 
           <a
             href={whatsappUrl}

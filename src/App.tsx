@@ -1,37 +1,21 @@
-import { About } from './components/About';
-import { BeforeAfter } from './components/BeforeAfter';
-import { Cta } from './components/Cta';
-import { Footer } from './components/Footer';
-import { Hero } from './components/Hero';
-import { Location } from './components/Location';
-import { Navbar } from './components/Navbar';
-import { Portfolio } from './components/Portfolio';
-import { Process } from './components/Process';
-import { Services } from './components/Services';
-import { TrustBar } from './components/TrustBar';
-import { Seguros } from './components/Seguros';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import SeguradorasPage from './pages/SeguradorasPage'
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#0a1628] text-white">
-      <Navbar />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/seguradoras" element={<SeguradorasPage />} />
 
-      <main>
-        <Hero />
-        <TrustBar />
-        <Services />
-        <Portfolio />
-        <BeforeAfter />
-        <About />
-		<Seguros />
-        <Process />
-        <Cta />
-        <Location />
-      </main>
+        <Route path="/seguros" element={<Navigate to="/seguradoras" replace />} />
+        <Route path="/seguro" element={<Navigate to="/seguradoras" replace />} />
 
-      <Footer />
-    </div>
-  );
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
