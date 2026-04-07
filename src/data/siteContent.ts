@@ -6,7 +6,7 @@ export const siteContent = {
     city: 'Alvorada/RS',
     whatsapp: '5551990024487',
     whatsappMessage: 'Olá! Vim pelo site e gostaria de um orçamento.',
-    phoneDisplay: '(51) 99328-5409',
+    phoneDisplay: '(51) 99002-4487',
     email: 'contato@metalicasevero.com.br',
     address: 'Alvorada/RS',
     serviceYears: '30+',
