@@ -4,7 +4,7 @@ export const siteContent = {
     tagline: 'Reparação Automotiva',
     eyebrow: 'Funilaria & Estética Automotiva',
     city: 'Alvorada/RS',
-    whatsapp: '5551993285409',
+    whatsapp: '5551990024487',
     whatsappMessage: 'Olá! Vim pelo site e gostaria de um orçamento.',
     phoneDisplay: '(51) 99328-5409',
     email: 'contato@metalicasevero.com.br',
