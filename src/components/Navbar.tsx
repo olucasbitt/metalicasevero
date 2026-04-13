@@ -43,17 +43,13 @@ export function Navbar() {
   // fechar dropdown fora
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(e.target as Node)
-      ) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
         setOpenMenu(null)
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () =>
-      document.removeEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   // scroll spy
@@ -149,7 +145,10 @@ export function Navbar() {
 
                       <Link
                         to="/seguradoras"
-                        onClick={() => setOpenMenu(null)}
+                        onClick={() => {
+                          setOpenMenu(null)
+                          setOpen(false)
+                        }}
                         className="block p-4 hover:bg-white/5"
                       >
                         <p className="text-white font-medium">
@@ -227,7 +226,9 @@ export function Navbar() {
                     <div className="pl-4 flex flex-col gap-3 mt-2">
 
                       <button
-                        onClick={() => handleNavigation('seguros')}
+                        onClick={() => {
+                          handleNavigation('seguros')
+                        }}
                         className="text-left text-[#b8cce0]"
                       >
                         Atendimento de sinistro
@@ -235,7 +236,10 @@ export function Navbar() {
 
                       <Link
                         to="/seguradoras"
-                        onClick={() => setOpen(false)}
+                        onClick={() => {
+                          setOpen(false)
+                          setOpenMenu(null)
+                        }}
                         className="text-left text-[#b8cce0]"
                       >
                         Seguradoras parceiras
