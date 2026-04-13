@@ -73,23 +73,23 @@ export function Seguros() {
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-8">
+            {/* CARD PRINCIPAL */}
             <div className="rounded-[28px] border border-white/10 bg-[#0c182b] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.25)] md:p-8">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div className="max-w-2xl">
-                  <span className="inline-flex rounded-full border border-[#e8651a]/20 bg-[#e8651a]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#ff9b5c]">
-                    Atendimento credenciado
-                  </span>
+              <div className="max-w-2xl">
+                
+                <span className="inline-flex rounded-full border border-[#e8651a]/20 bg-[#e8651a]/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-[#ff9b5c]">
+                  Atendimento credenciado
+                </span>
 
-                  <h3 className="mt-4 font-['Barlow_Condensed'] text-[1.9rem] uppercase leading-none text-white md:text-[2.2rem]">
-                    Mais tranquilidade no seu atendimento
-                  </h3>
+                <h3 className="mt-4 font-['Barlow_Condensed'] text-2xl font-bold uppercase leading-tight text-white md:text-[2.2rem]">
+                  Mais tranquilidade no seu atendimento
+                </h3>
 
-                  <p className="mt-4 max-w-2xl text-[15px] leading-7 text-[#b8cce0]">
-                    Somos credenciados nas principais seguradoras do mercado e também
-                    atendemos diversas outras companhias e associações, garantindo mais
-                    flexibilidade e agilidade no seu atendimento.
-                  </p>
-                </div>
+                <p className="mt-4 text-[1rem] leading-7 text-[#b8cce0]">
+                  Somos credenciados nas principais seguradoras do mercado e também
+                  atendemos diversas outras companhias e associações, garantindo mais
+                  flexibilidade e agilidade no seu atendimento.
+                </p>
               </div>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
@@ -109,19 +109,21 @@ export function Seguros() {
               </div>
             </div>
 
+            {/* LINK */}
             <div className="flex flex-col items-center gap-3 rounded-[24px] border border-white/10 bg-white/[0.03] px-6 py-6 text-center">
-              <p className="text-[15px] leading-7 text-[#b8cce0]">
+              <p className="text-[1rem] leading-7 text-[#b8cce0]">
                 Trabalhamos com diversas outras seguradoras e associações além destas.
               </p>
 
               <a
                 href="/seguradoras"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white transition hover:border-[#e8651a]/30 hover:bg-[#e8651a]/10"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 font-['Barlow_Condensed'] text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#e8651a]/30 hover:bg-[#e8651a]/10"
               >
                 Ver todas as seguradoras →
               </a>
             </div>
 
+            {/* BENEFÍCIOS */}
             <div className="grid gap-4 sm:grid-cols-2">
               {benefits.map((benefit) => (
                 <article
@@ -129,10 +131,12 @@ export function Seguros() {
                   className="rounded-2xl border border-white/10 bg-[#0c182b] p-5 shadow-[0_12px_30px_rgba(0,0,0,0.18)]"
                 >
                   <div className="mb-3 h-1.5 w-12 rounded-full bg-[#e8651a]" />
-                  <h4 className="font-['Barlow_Condensed'] text-[1.5rem] uppercase leading-none text-white">
+
+                  <h4 className="font-['Barlow_Condensed'] text-xl font-bold uppercase text-white">
                     {benefit.title}
                   </h4>
-                  <p className="mt-3 text-[15px] leading-7 text-[#b8cce0]">
+
+                  <p className="mt-3 text-[1rem] leading-7 text-[#b8cce0]">
                     {benefit.description}
                   </p>
                 </article>
@@ -140,30 +144,29 @@ export function Seguros() {
             </div>
           </div>
 
+          {/* FORM */}
           <aside className="rounded-[28px] border border-white/10 bg-[#0c182b] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.3)] md:p-8">
-            <span className="inline-flex rounded-full border border-[#25d366]/20 bg-[#25d366]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7ae7aa]">
+            
+            <span className="inline-flex rounded-full border border-[#25d366]/20 bg-[#25d366]/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.14em] text-[#7ae7aa]">
               Atendimento rápido
             </span>
 
-            <h3 className="mt-4 font-['Barlow_Condensed'] text-[1.9rem] uppercase leading-none text-white md:text-[2.2rem]">
+            <h3 className="mt-4 font-['Barlow_Condensed'] text-2xl font-bold uppercase text-white md:text-[2.2rem]">
               Solicite atendimento pelo WhatsApp
             </h3>
 
-            <p className="mt-4 text-[15px] leading-7 text-[#b8cce0]">
+            <p className="mt-4 text-[1rem] leading-7 text-[#b8cce0]">
               Preencha seu nome e selecione a seguradora ou associação. A mensagem
               já será enviada pronta para agilizar o atendimento.
             </p>
 
             <div className="mt-8 space-y-5">
+              
               <div>
-                <label
-                  htmlFor="insurance-name"
-                  className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-[#d9e6f2]"
-                >
+                <label className="mb-2 block text-xs font-medium uppercase tracking-[0.12em] text-[#9fb3c8]">
                   Seu nome
                 </label>
                 <input
-                  id="insurance-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -173,14 +176,10 @@ export function Seguros() {
               </div>
 
               <div>
-                <label
-                  htmlFor="insurance-company"
-                  className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-[#d9e6f2]"
-                >
+                <label className="mb-2 block text-xs font-medium uppercase tracking-[0.12em] text-[#9fb3c8]">
                   Seguradora ou associação
                 </label>
                 <select
-                  id="insurance-company"
                   value={insurance}
                   onChange={(e) => setInsurance(e.target.value)}
                   className="h-12 w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 text-sm text-white outline-none transition focus:border-[#e8651a]/60"
@@ -198,14 +197,10 @@ export function Seguros() {
 
               {insurance === 'Outra' && (
                 <div>
-                  <label
-                    htmlFor="custom-insurance"
-                    className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-[#d9e6f2]"
-                  >
+                  <label className="mb-2 block text-xs font-medium uppercase tracking-[0.12em] text-[#9fb3c8]">
                     Qual seguradora?
                   </label>
                   <input
-                    id="custom-insurance"
                     type="text"
                     value={customInsurance}
                     onChange={(e) => setCustomInsurance(e.target.value)}
@@ -216,7 +211,7 @@ export function Seguros() {
               )}
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#d9e6f2]">
+                <p className="text-xs font-medium uppercase tracking-[0.12em] text-[#9fb3c8]">
                   Benefícios do atendimento
                 </p>
 
@@ -232,7 +227,7 @@ export function Seguros() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#25d366] px-5 text-sm font-semibold text-white transition hover:bg-[#1ebe5d]"
+                className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-[#25d366] px-5 font-['Barlow_Condensed'] text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-[#1ebe5d]"
               >
                 Falar no WhatsApp
               </a>

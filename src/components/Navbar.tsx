@@ -1,110 +1,256 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { whatsappUrl } from '../data/siteContent'
 import { Menu, X } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
-  const location = useLocation()
+  const [active, setActive] = useState('')
+  const [openMenu, setOpenMenu] = useState(null)
 
+  const location = useLocation()
+  const navigate = useNavigate()
   const isHome = location.pathname === '/'
 
-  const getLink = (hash: string) => {
-    return isHome ? hash : `/${hash}`
+  const sections = [
+    { id: 'servicos', label: 'Serviços' },
+    { id: 'galeria', label: 'Galeria' },
+    { id: 'sobre', label: 'Sobre' },
+    { id: 'seguros', label: 'Sinistros & Seguradoras' },
+    { id: 'contato', label: 'Contato' },
+  ]
+
+  const indicatorRef = useRef(null)
+  const linksRef = useRef({})
+  const menuRef = useRef(null)
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
+
+  const handleNavigation = (id) => {
+    setOpen(false)
+    setOpenMenu(null)
+
+    if (isHome) scrollToSection(id)
+    else navigate(`/#${id}`)
+  }
+
+  // fechar dropdown fora
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setOpenMenu(null)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  // scroll spy
+  useEffect(() => {
+    if (!isHome) return
+
+    const handleScroll = () => {
+      let current = ''
+
+      sections.forEach(({ id }) => {
+        const el = document.getElementById(id)
+        if (!el) return
+
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= 120 && rect.bottom >= 120) {
+          current = id
+        }
+      })
+
+      if (current) setActive(current)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isHome])
+
+  useEffect(() => {
+    const el = linksRef.current[active]
+    const indicator = indicatorRef.current
+
+    if (el && indicator) {
+      indicator.style.width = `${el.offsetWidth}px`
+      indicator.style.left = `${el.offsetLeft}px`
+      indicator.style.opacity = 1
+    }
+  }, [active])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0a1628]/80 backdrop-blur border-b border-white/10">
-      <div className="mx-auto flex h-16 w-full max-w-[1180px] items-center px-4 md:px-8">
-        
+      <div className="mx-auto flex h-16 max-w-[1180px] items-center px-4 md:px-8">
+
         {/* LOGO */}
         <Link to="/" className="flex items-center">
-          <img src="/images/logo.png" alt="Metálica Severo" className="h-10" />
+          <img src="/images/logo.png" className="h-10" />
         </Link>
 
         <div className="flex-1" />
 
-        {/* LINKS DESKTOP */}
-        <nav className="hidden md:flex items-center gap-8 text-sm text-[#b8cce0]">
-          <Link to={getLink('#servicos')} className="hover:text-white transition">
-            Serviços
-          </Link>
+        {/* DESKTOP */}
+        <nav className="relative hidden md:flex items-center gap-8 text-sm">
 
-          <Link to={getLink('#sobre')} className="hover:text-white transition">
-            Sobre
-          </Link>
+          {sections.map(({ id, label }) => {
 
-          <Link to={getLink('#galeria')} className="hover:text-white transition">
-            Galeria
-          </Link>
+            if (id === 'seguros') {
+              return (
+                <div key={id} ref={menuRef} className="relative">
 
-          <Link to={getLink('#contato')} className="hover:text-white transition">
-            Contato
-          </Link>
+                  <button
+                    ref={(el) => (linksRef.current[id] = el)}
+                    onClick={() =>
+                      setOpenMenu(openMenu === 'sinistros' ? null : 'sinistros')
+                    }
+                    className={`transition ${
+                      active === id
+                        ? 'text-white font-semibold'
+                        : 'text-[#b8cce0] hover:text-white'
+                    }`}
+                  >
+                    Sinistros & Seguradoras
+                  </button>
 
-          {/* NOVO LINK (IMPORTANTE) */}
-          <Link to="/seguradoras" className="hover:text-white transition">
-            Seguradoras
-          </Link>
+                  {openMenu === 'sinistros' && (
+                    <div className="absolute top-10 left-0 w-[320px] bg-[#0a1628] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+
+                      <button
+                        onClick={() => handleNavigation('seguros')}
+                        className="w-full text-left p-4 hover:bg-white/5"
+                      >
+                        <p className="text-white font-medium">
+                          Atendimento de sinistro
+                        </p>
+                        <p className="text-xs text-[#7f93ad] mt-1">
+                          Processo de reparo, análise e suporte com seguradora
+                        </p>
+                      </button>
+
+                      <div className="h-px bg-white/10" />
+
+                      <Link
+                        to="/seguradoras"
+                        onClick={() => setOpenMenu(null)}
+                        className="block p-4 hover:bg-white/5"
+                      >
+                        <p className="text-white font-medium">
+                          Seguradoras parceiras
+                        </p>
+                        <p className="text-xs text-[#7f93ad] mt-1">
+                          Lista completa de empresas conveniadas
+                        </p>
+                      </Link>
+
+                    </div>
+                  )}
+                </div>
+              )
+            }
+
+            return (
+              <button
+                key={id}
+                ref={(el) => (linksRef.current[id] = el)}
+                onClick={() => handleNavigation(id)}
+                className={`transition ${
+                  active === id
+                    ? 'text-white font-semibold'
+                    : 'text-[#b8cce0] hover:text-white'
+                }`}
+              >
+                {label}
+              </button>
+            )
+          })}
+
+          <span
+            ref={indicatorRef}
+            className="absolute bottom-[-6px] h-[2px] bg-[#e8651a] transition-all duration-300 opacity-0"
+          />
 
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="ml-4 inline-flex items-center rounded-lg bg-[#e8651a] px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-[#e8651a]/20 transition hover:bg-[#d45712] hover:scale-[1.03]"
+            className="ml-6 rounded-lg bg-[#e8651a] px-5 py-2 text-sm font-semibold text-white hover:bg-[#d45712]"
           >
             Orçamento
           </a>
         </nav>
 
-        {/* BOTÃO MOBILE */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden text-white"
-        >
+        {/* MOBILE BTN */}
+        <button onClick={() => setOpen(!open)} className="md:hidden text-white">
           {open ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
-      {/* MENU MOBILE */}
-      <div
-        className={`md:hidden transition-all duration-300 overflow-hidden ${
-          open ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className="flex flex-col gap-4 px-6 pb-6 pt-4 bg-[#0a1628]/95 backdrop-blur border-t border-white/10">
-          
-          <Link onClick={() => setOpen(false)} to={getLink('#servicos')} className="text-[#b8cce0] hover:text-white">
-            Serviços
-          </Link>
+      {/* MOBILE */}
+      <div className={`md:hidden overflow-hidden transition-all ${open ? 'max-h-[500px]' : 'max-h-0'}`}>
+        <div className="flex flex-col gap-4 px-6 py-4 bg-[#0a1628]/95">
 
-          <Link onClick={() => setOpen(false)} to={getLink('#sobre')} className="text-[#b8cce0] hover:text-white">
-            Sobre
-          </Link>
+          {sections.map(({ id, label }) => {
 
-          <Link onClick={() => setOpen(false)} to={getLink('#galeria')} className="text-[#b8cce0] hover:text-white">
-            Galeria
-          </Link>
+            if (id === 'seguros') {
+              return (
+                <div key={id}>
+                  <button
+                    onClick={() =>
+                      setOpenMenu(openMenu === 'sinistros' ? null : 'sinistros')
+                    }
+                    className="text-left text-[#b8cce0]"
+                  >
+                    Sinistros & Seguradoras
+                  </button>
 
-          <Link onClick={() => setOpen(false)} to={getLink('#contato')} className="text-[#b8cce0] hover:text-white">
-            Contato
-          </Link>
+                  {openMenu === 'sinistros' && (
+                    <div className="pl-4 flex flex-col gap-3 mt-2">
 
-          <Link
-            onClick={() => setOpen(false)}
-            to="/seguradoras"
-            className="text-[#b8cce0] hover:text-white"
-          >
-            Seguradoras
-          </Link>
+                      <button
+                        onClick={() => handleNavigation('seguros')}
+                        className="text-left text-[#b8cce0]"
+                      >
+                        Atendimento de sinistro
+                      </button>
+
+                      <Link
+                        to="/seguradoras"
+                        onClick={() => setOpen(false)}
+                        className="text-left text-[#b8cce0]"
+                      >
+                        Seguradoras parceiras
+                      </Link>
+
+                    </div>
+                  )}
+                </div>
+              )
+            }
+
+            return (
+              <button
+                key={id}
+                onClick={() => handleNavigation(id)}
+                className="text-left text-[#b8cce0] hover:text-white"
+              >
+                {label}
+              </button>
+            )
+          })}
 
           <a
             href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-2 text-center rounded-lg bg-[#25d366] px-4 py-3 font-semibold text-white"
+            className="text-center bg-[#25d366] py-3 rounded-lg font-semibold text-white"
           >
-            Falar no WhatsApp
+            WhatsApp
           </a>
         </div>
       </div>
