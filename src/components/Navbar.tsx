@@ -3,16 +3,19 @@ import { whatsappUrl } from '../data/siteContent'
 import { Menu, X } from 'lucide-react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
+type SectionId = 'servicos' | 'galeria' | 'sobre' | 'seguros' | 'contato'
+type OpenMenu = 'sinistros' | null
+
 export function Navbar() {
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('')
-  const [openMenu, setOpenMenu] = useState(null)
+  const [open, setOpen] = useState<boolean>(false)
+  const [active, setActive] = useState<string>('')
+  const [openMenu, setOpenMenu] = useState<OpenMenu>(null)
 
   const location = useLocation()
   const navigate = useNavigate()
   const isHome = location.pathname === '/'
 
-  const sections = [
+  const sections: { id: SectionId; label: string }[] = [
     { id: 'servicos', label: 'Serviços' },
     { id: 'galeria', label: 'Galeria' },
     { id: 'sobre', label: 'Sobre' },
@@ -20,16 +23,16 @@ export function Navbar() {
     { id: 'contato', label: 'Contato' },
   ]
 
-  const indicatorRef = useRef(null)
-  const linksRef = useRef({})
-  const menuRef = useRef(null)
+  const indicatorRef = useRef<HTMLSpanElement | null>(null)
+  const linksRef = useRef<Record<string, HTMLElement | null>>({})
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const handleNavigation = (id) => {
+  const handleNavigation = (id: string) => {
     setOpen(false)
     setOpenMenu(null)
 
@@ -39,14 +42,18 @@ export function Navbar() {
 
   // fechar dropdown fora
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node)
+      ) {
         setOpenMenu(null)
       }
     }
 
     document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   // scroll spy
@@ -75,6 +82,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [isHome])
 
+  // indicator
   useEffect(() => {
     const el = linksRef.current[active]
     const indicator = indicatorRef.current
@@ -82,7 +90,7 @@ export function Navbar() {
     if (el && indicator) {
       indicator.style.width = `${el.offsetWidth}px`
       indicator.style.left = `${el.offsetLeft}px`
-      indicator.style.opacity = 1
+      indicator.style.opacity = '1'
     }
   }, [active])
 
@@ -107,7 +115,9 @@ export function Navbar() {
                 <div key={id} ref={menuRef} className="relative">
 
                   <button
-                    ref={(el) => (linksRef.current[id] = el)}
+                    ref={(el) => {
+                      linksRef.current[id] = el
+                    }}
                     onClick={() =>
                       setOpenMenu(openMenu === 'sinistros' ? null : 'sinistros')
                     }
@@ -117,7 +127,7 @@ export function Navbar() {
                         : 'text-[#b8cce0] hover:text-white'
                     }`}
                   >
-                    Sinistros & Seguradoras
+                    {label}
                   </button>
 
                   {openMenu === 'sinistros' && (
@@ -159,7 +169,9 @@ export function Navbar() {
             return (
               <button
                 key={id}
-                ref={(el) => (linksRef.current[id] = el)}
+                ref={(el) => {
+                  linksRef.current[id] = el
+                }}
                 onClick={() => handleNavigation(id)}
                 className={`transition ${
                   active === id
@@ -208,7 +220,7 @@ export function Navbar() {
                     }
                     className="text-left text-[#b8cce0]"
                   >
-                    Sinistros & Seguradoras
+                    {label}
                   </button>
 
                   {openMenu === 'sinistros' && (
