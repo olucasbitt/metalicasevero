@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { whatsappUrl } from '../data/siteContent'
 import { SectionHeading } from './SectionHeading'
+import { useNavigate } from 'react-router-dom'
 
 const partners = [
   { name: 'Bradesco Seguros', logo: '/images/seguros/bradesco.png' },
@@ -51,6 +52,7 @@ export function Seguros() {
   const [name, setName] = useState('')
   const [insurance, setInsurance] = useState('')
   const [customInsurance, setCustomInsurance] = useState('')
+  const navigate = useNavigate()
 
   const whatsappLink = useMemo(() => {
     const selectedInsurance =
@@ -115,12 +117,12 @@ export function Seguros() {
                 Trabalhamos com diversas outras seguradoras e associações além destas.
               </p>
 
-              <a
-                href="/seguradoras"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 font-['Barlow_Condensed'] text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#e8651a]/30 hover:bg-[#e8651a]/10"
-              >
-                Ver todas as seguradoras →
-              </a>
+             <button
+  onClick={() => navigate('/seguradoras')}
+  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-2.5 font-['Barlow_Condensed'] text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:border-[#e8651a]/30 hover:bg-[#e8651a]/10"
+>
+  Ver todas as seguradoras →
+</button>
             </div>
 
             {/* BENEFÍCIOS */}
