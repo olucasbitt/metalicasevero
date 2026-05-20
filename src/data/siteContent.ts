@@ -173,7 +173,7 @@ export const siteContent = {
     title: 'Atendimento em Alvorada/RS',
     items: [
       { label: 'Endereço', value: 'R. Cedro, 94 - Maria Regina, Alvorada - RS' },
-      { label: 'Telefone', value: '(51) 99328-5409' },
+      { label: 'Telefone', value: '(51) 99002-4487' },
       { label: 'WhatsApp', value: 'Atendimento rápido para orçamento' },
     ],
     mapTitle: 'Metálica Severo',

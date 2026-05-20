@@ -9,16 +9,20 @@ type Insurance = {
 }
 
 const credenciadas: Insurance[] = [
+  { name: 'Aliro Seguro', logo: '/images/seguros/aliro.png' },
   { name: 'Alfa Seguros', logo: '/images/seguros/alfa.png' },
   { name: 'Bradesco Seguros', logo: '/images/seguros/bradesco.png' },
+  { name: 'Darwin Seguros', logo: '/images/seguros/darwin.png' },
   { name: 'Essor', logo: '/images/seguros/essor.png' },
   { name: 'Gente Seguradora', logo: '/images/seguros/gente.png' },
   { name: 'HDI Seguros', logo: '/images/seguros/hdi.png' },
   { name: 'Justos Seguros', logo: '/images/seguros/justos.png' },
-  { name: 'Liberty Seguros / Yelum Seguros', logo: '/images/seguros/liberty.png' },
+  { name: 'Liberty Seguros', logo: '/images/seguros/liberty.png' },
   { name: 'Mapfre Seguros', logo: '/images/seguros/mapfre.png' },
   { name: 'Santander Seguros', logo: '/images/seguros/santander.png' },
   { name: 'Tokio Marine', logo: '/images/seguros/tokio.png' },
+  { name: 'Yelum Seguradora', logo: '/images/seguros/yelum.png' },  
+  
 ]
 
 const naoCredenciadas: Insurance[] = [
