@@ -10,6 +10,7 @@ import { Process } from '../components/Process'
 import { Services } from '../components/Services'
 import { TrustBar } from '../components/TrustBar'
 import { Seguros } from '../components/Seguros'
+import { ReviewsSection } from '../components/ReviewsSection' 
 
 export function HomePage() {
   return (
@@ -25,6 +26,7 @@ export function HomePage() {
         <About />
         <Seguros />
         <Process />
+		<ReviewsSection />
         <Cta />
         <Location />
       </main>

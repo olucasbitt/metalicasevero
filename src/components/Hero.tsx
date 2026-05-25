@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative isolate overflow-hidden bg-[#0a1628] pt-32 md:pt-36"
+      className="relative isolate overflow-hidden bg-[#09111f] pt-32 md:pt-36"
     >
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(135deg,#06101d_0%,#0b1d3b_52%,#071325_100%)]" />
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_72%_22%,rgba(232,101,26,0.16),transparent_26%),radial-gradient(circle_at_65%_30%,rgba(255,255,255,0.04),transparent_18%)]" />

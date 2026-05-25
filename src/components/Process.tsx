@@ -3,7 +3,7 @@ import { SectionHeading } from './SectionHeading'
 
 export function Process() {
   return (
-    <section id="processo" className="bg-[#0d2244] py-24">
+    <section id="processo" className="bg-[#10284f] py-24">
       <div className="mx-auto w-full max-w-[1180px] px-4 md:px-8">
         <SectionHeading
           label={siteContent.process.label}
